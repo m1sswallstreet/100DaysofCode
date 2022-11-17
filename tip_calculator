@@ -7,12 +7,12 @@
 
 #Write your code below this line 👇
 
-print("Welcome to the tip calculator.")
-total = input("What was the total bill? ")
+print("Welcome to the tip calculator!")
+total = input("What was the total bill? $")
 bill = float(total)
 #bill is the total bill amount
 
-tip_percentage=input("What percentage tip would you like to give? 10, 12, or 15? ")
+tip_percentage=input("What percentage tip would you like to give? 15, 18, or 20? ")
 percentage = float(tip_percentage)
 #percentage is the desired percentage
 

@@ -1,0 +1,82 @@
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+
+#Write your code below this line 👇
+import random
+
+game_options = ["Rock", "Paper", "Scissors"]
+
+choose = input("Rock, Paper, or Scissors? ")
+your_choice = choose.lower()
+
+computer_choice = random.randint(0,2)
+computer_chooses = game_options[computer_choice]
+
+draw = (f"The computer chose {computer_chooses}. Draw\n")
+lose = (f"The computer chose {computer_chooses}. You lost. Too bad.")
+win = (f"The computer chose {computer_chooses}. You win!")
+
+
+
+if your_choice == "rock":
+  print (f"{rock}\n\nYou chose Rock\n")
+  if computer_choice == 0:
+    print (rock)
+    print(draw)
+  elif computer_choice == 1:
+    print (paper)
+    print(lose)
+  elif computer_choice == 2:
+    print (scissors)
+    print(win)
+
+elif your_choice == "scissors":
+  print (f"{scissors}\n\nYou chose Scissors\n")
+  if computer_choice == 0:
+    print (rock)
+    print(lose)
+  elif computer_choice == 1:
+    print (paper)
+    print(win)
+  elif computer_choice == 2:
+    print (scissors)
+    print(draw)
+    
+elif your_choice == "paper":
+  print (f"{paper}\n\nYou chose Paper\n")
+  if computer_choice == 0:
+    print (rock)
+    print(win)
+  elif computer_choice == 1:
+    print (paper)
+    print(draw)
+  elif computer_choice == 2:
+    print (scissors)
+    print(lose)
+    
+else:
+  print("Please choose either rock, paper, or scissors.")

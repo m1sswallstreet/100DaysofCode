@@ -1,0 +1,103 @@
+print('''
+*******************************************************************************
+          |                   |                  |                     |
+ _________|________________.=""_;=.______________|_____________________|_______
+|                   |  ,-"_,=""     `"=.|                  |
+|___________________|__"=._o`"-._        `"=.______________|___________________
+          |                `"=._o`"=._      _`"=._                     |
+ _________|_____________________:=._o "=._."_.-="'"=.__________________|_______
+|                   |    __.--" , ; `"=._o." ,-"""-._ ".   |
+|___________________|_._"  ,. .` ` `` ,  `"-._"-._   ". '__|___________________
+          |           |o`"=._` , "` `; .". ,  "-._"-._; ;              |
+ _________|___________| ;`-.o`"=._; ." ` '`."\` . "-._ /_______________|_______
+|                   | |o;    `"-.o`"=._``  '` " ,__.--o;   |
+|___________________|_| ;     (#) `-.o `"=.`_.--"_o.-; ;___|___________________
+____/______/______/___|o;._    "      `".o|o_.--"    ;o;____/______/______/____
+/______/______/______/_"=._o--._        ; | ;        ; ;/______/______/______/_
+____/______/______/______/__"=._o--._   ;o|o;     _._;o;____/______/______/____
+/______/______/______/______/____"=._o._; | ;_.--"o.--"_/______/______/______/_
+____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
+/______/______/______/______/______/______/______/______/______/______/_____ /
+*******************************************************************************
+''')
+print("Welcome to Treasure Island. Home of the most revered pirates in the game.\n\nRumor has it that the treasure trove of Blackbeard is still buried under this sacred soil.")
+print("Your mission is to find the treasure.\n\nBut there's a catch. This island is full of snakes, beasts, fire-pits, and even some mysterious animals swimming in the lake.\n\nStay alive, find the treasure, and I'll help you get off this island alive.\n\n  Time to go!\n")  
+
+#https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Treasure%20Island%20Conditional.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1oDe4ehjWZipYRsVfeAx2HyB7LCQ8_Fvi%26export%3Ddownload
+
+#Write your code below this line 👇
+first_turn = input("You'll have to get through the forest first. Would you like to walk or run? ")
+if first_turn.lower() == "walk":
+  second_turn = input("Whew! That was close. You walked right past that crazy ant mound. If you had run, you would have crashed right into it.\nGood choice.\n\nOk, time to cross the river. I heard the treasure room is in that building on the other side. Would you like to swim or boat across? ")
+  if second_turn.lower() == "boat":
+    third_turn = input("Nice! That boat sure came in handy.\n\n You made it across. And look! There's the treasure house.\n\nBut wait. There are 3 doors. Oh gosh, which one do you choose? 1, 2, or 3? ")
+    if third_turn == "2":
+      print("you won!")
+    elif third_turn == "3" or third_turn == "1":
+      if third_turn == "1":    
+        print('''
+                              _ 
+                            _-' "'-,     
+                         _-' | d$$b |  
+                      _-'    | $$$$ |    
+                   _-'       | Y$$P |  
+                _-'|         |      |
+             _-'  _*         |      |
+          _-' |_-"      __--''\    /
+       _-'         __--'     __*--'
+     -'       __-''    __--*__-"`
+    |    _--''   __--*"__-'`  
+    |_--"  .--=`"__-||"  
+    |      |  |\\   ||
+    | .dUU |  | \\ //
+    | UUUU | _|___//
+    | UUUU |  |   
+    | UUUU |  |         
+    | UUUU |  |
+    | UUUU |  |
+    | UUUU |  |
+    | UUP' |  |
+    |   ___^-"`
+     ""'          
+
+        Darn it! The pirates got you! You were shot by Blackbeard
+        ''')
+      else:
+        print('''
+  O      , U
+ <_\__--"-' | 
+  |\  `----'
+  L L           
+
+        Aww shucks! You walked right into a trap! You've been burned by fire. Toasty!
+        ''')
+    else:
+      print("Game Over")
+    
+  else:
+    print('''
+               ___
+              /___\    
+          .-.|=0-0=|.-.  
+     (\_.'.-\ \_o_/`/-.'._/)
+ ~` - ~`-^_`~ -_~ ^- ~_` -~ _
+jgs -  ~  -  ^   - ~ -  ~  -
+
+
+    Oh gosh! Swimming is not your strong suit!\n\nEspecially when there's a loch ness monster chasing you! Unfortunately, you were attacked the moment you took your first stroke.\n\nYou never stood a chance. Too bad. I heard that treasure is worth thousands.\n\nMaybe next time.
+    
+    ''')
+else:
+  print('''
+ \       /
+  \     /  
+   \.-./ 
+  (o\^/o)  _   _   _     __
+   ./ \.\ ( )-( )-( ) .-'  '-.
+    {-} \(//  ||   \\/ (   )) '-.
+         //-__||__.-\\.       .-'
+        (/    ()     \)'-._.-'
+        ||    ||      \\
+        ('    ('       ')
+  Oh no! You ran too fast and tripped over a branch! The killer ants got you and you died from a thousand tiny bug bites.\n Smh. What a tough way to go.
+  ''')

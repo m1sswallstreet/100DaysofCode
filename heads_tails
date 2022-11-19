@@ -1,0 +1,25 @@
+#Remember to use the random module
+#Hint: Remember to import the random module here at the top of the file. 🎲
+	 
+#Write the rest of your code below this line 👇
+import random
+
+coin = random.randint (0,1)
+
+guess = input ("Flip a coin. Do you guess heads or tails? ")
+you_guessed = 9
+
+if guess.lower() == "heads":
+    you_guessed = 0
+    if coin == 0:
+        print ("You guessed heads and the coin flipped to heads. You won!")
+    elif coin == 1:
+        print ("You guessed heads and the coin flipped to tails. You lost!")
+elif guess.lower() == "tails":
+    you_guessed = 1
+    if coin == 0:
+        print ("You guessed tails and the coin flipped to heads. You lost!")
+    elif coin == 1:
+        print ("You guessed tails and the coin flipped to tails. You won!")
+else:
+    print ("Please guess heads or tails.")

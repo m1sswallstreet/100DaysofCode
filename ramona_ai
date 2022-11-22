@@ -1,0 +1,63 @@
+import pywhatkit
+import speech_recognition as sr
+import pyttsx3
+import datetime
+import wikipedia
+import pyjokes
+
+listener = sr.Recognizer()
+
+# Initialize the Python text to speech engine
+engine = pyttsx3.init()
+# Get all types of voices
+#voices = engine.getProperty('voices')
+# Set the voice to the second option, a female voice
+#engine.setProperty('voice', voices[1].id)
+
+
+# Speak as Tish
+def talk(text):
+    engine.say(text)
+    engine.runAndWait()
+
+
+def take_command():
+    try:
+        # Use the microphone as a source and listen to it using the speech recognizer
+        with sr.Microphone() as source:
+            print('Listening...')
+            #talk('Hi, I\'m Ramona. Ask me a question. Don\'t forget to say my name.')
+            voice = listener.listen(source)
+            commandd = listener.recognize_google(voice)
+            # Detect if Ramona is mentioned
+            commandd = commandd.lower()
+            if 'ramona' in commandd:
+                commandd = commandd.replace('ramona', '')
+                print(commandd)
+    except:
+        pass
+    return commandd
+
+
+def run_ramona():
+    commandd = take_command()
+    if 'play' in commandd:
+        song = commandd.replace('play', '')
+        talk('playing ' + song)
+        pywhatkit.playonyt(song)
+    elif 'time' in commandd:
+        time = datetime.datetime.now().strftime('%I:%M')
+        talk('The current time is' + time)
+    elif 'who is' in commandd:
+        person = commandd.replace('who is', '')
+        wiki = wikipedia.summary(person, 1)
+        print(wiki)
+        talk(wiki)
+    elif 'joke' in commandd:
+        joke = pyjokes.get_joke()
+        talk(joke)
+    else:
+        talk('I didn\'t understand you. Please repeat your command. Don\'t forget to say my name.')
+
+
+run_ramona()

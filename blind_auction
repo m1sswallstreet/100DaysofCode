@@ -1,0 +1,35 @@
+from replit import clear
+#HINT: You can call clear() to clear the output in the console.
+from art import logo
+print(logo)
+
+#Create an empty dictionary for the bids
+bids = {}
+
+#Create a function to accept the bids
+def accept_bids():
+    bidders = True
+    while bidders:
+        bidder = input("What is your name?: ")
+        bid_amount = int(input("What's your bid?: $").replace(',',''))
+        bids[bidder] = bid_amount
+        more_bidders = input("Are there any other bidders? Type Y for yes or N for no\n")
+        if more_bidders.lower() == "y":
+            clear()
+        elif more_bidders.lower() == "n":
+            bidders = False
+            print("All bids received")
+        else:
+            print("Please type Y or N")
+            clear()
+
+
+            
+accept_bids()
+
+#Create a function to analyze the bids
+def analyze_bids():
+    highest_bid = max(bids, key=bids.get)
+    print(f"{highest_bid} is the highest bidder, with a bid of ${bids[highest_bid]:,} dollars.")
+
+analyze_bids()

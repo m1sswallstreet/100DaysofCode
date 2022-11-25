@@ -1,0 +1,174 @@
+############### Blackjack Project #####################
+
+#Difficulty Normal 😎: Use all Hints below to complete the project.
+#Difficulty Hard 🤔: Use only Hints 1, 2, 3 to complete the project.
+#Difficulty Extra Hard 😭: Only use Hints 1 & 2 to complete the project.
+#Difficulty Expert 🤯: Only use Hint 1 to complete the project.
+
+############### Our Blackjack House Rules #####################
+
+## The deck is unlimited in size. 
+## There are no jokers. 
+## The Jack/Queen/King all count as 10.
+## The the Ace can count as 11 or 1.
+## Use the following list as the deck of cards:
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+## The cards in the list have equal probability of being drawn.
+## Cards are not removed from the deck as they are drawn.
+## The computer is the dealer.
+
+##################### Hints #####################
+
+#Hint 1: Go to this website and try out the Blackjack game: 
+#   https://games.washingtonpost.com/games/blackjack/
+#Then try out the completed Blackjack project here: 
+#   http://blackjack-final.appbrewery.repl.run
+
+#Hint 2: Read this breakdown of program requirements: 
+#   http://listmoz.com/view/6h34DJpvJBFVRlZfJvxF
+#Then try to create your own flowchart for the program.
+
+import random
+from replit import clear
+from art import logo
+deck_size = len(cards) - 1
+
+
+#Create Player Card List
+player1_hand = []
+
+#Create Computer Card List
+computer_hand = []
+
+
+#Calculate player score
+def player_score():
+     return sum(player1_hand)
+
+#Calculate computer score
+def computer_score():
+    return sum(computer_hand)
+
+    
+#Show current cards
+def show_cards():
+    print(f"    Your cards: {player1_hand}, current score: {player_score()}")
+    print(f"    Computer's first card: {computer_hand[0]}\n")
+
+def show_final_hands():
+    print(f"Your final hand: {player1_hand}, final score: {player_score()}")
+    print(f"Computer's final hand: {computer_hand}, final score: {computer_score()}")
+    
+#Deal first 2 cards
+
+def deal_2_cards():
+    player1_hand.append(random.choice(cards))
+    player1_hand.append(random.choice(cards))
+    computer_hand.append(random.choice(cards))
+    computer_hand.append(random.choice(cards)) 
+    show_cards()
+
+
+def check_initial_score():
+    if computer_score() == 21 and player_score() == 21:
+        print("Draw")
+    elif computer_score() == 21:
+        print("Computer wins. Game over")
+    
+        
+#Deal a card and add it to player1 card list
+def deal_card():
+    draw = cards[random.randint(0, deck_size)]
+    if draw == 11 and player_score() + draw > 21:
+        player1_hand.append(1)
+    else:
+        player1_hand.append(draw)
+    show_cards()
+   
+def player_1_turn():
+    hit_me = True
+    while hit_me:
+        if player_score() == 21:
+            hit_me = False
+            print("Blackjack! You win!")
+        elif player_score() < 21:
+            if input("Type 'y' to get another card, type 'n' to pass: ") == 'y':
+                deal_card()
+            else:
+                hit_me = False
+        elif player_score() > 21:
+            hit_me = False
+            print("You busted. 😭")
+
+
+
+def deal_dealer_card():
+    pull = cards[random.randint(0, deck_size)]
+    if pull == 11 and computer_score() + pull > 21:
+        computer_hand.append(1)
+    else:
+        computer_hand.append(pull)
+
+
+def dealer_plays():
+    under_17 = True
+    while under_17:
+        if computer_score() == 21:
+            under_17 = False
+            print("Blackjack. Dealer wins.\n") 
+            show_final_hands()
+        elif computer_score() > 21:
+            under_17 = False
+            print("Dealer busts. You win!\n")
+            show_final_hands()
+        elif computer_score() == player_score():
+            under_17 = False 
+            print("Draw.\n")
+            show_final_hands()
+        elif computer_score() > player_score():
+            under_17 = False
+            print("Dealer wins\n")
+            show_final_hands()
+        elif computer_score() <= 17:
+            deal_dealer_card()
+        else:
+            under_17 = False
+            print("You scored higher than the dealer. You win!\n")
+            show_final_hands()
+
+if input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == 'y':
+    play_game = True
+    print(logo)
+    deal_2_cards()
+
+    while play_game:
+        check_initial_score()
+        player_1_turn()
+        if player_score() < 21:
+            dealer_plays()
+        else:
+            show_final_hands()
+        
+        play_again = input("\nWould you like to play again? Type 'Y' for yes or 'N' for no.: ")
+        
+        if play_again.lower() == 'y':
+            clear()
+            player1_hand.clear()
+            computer_hand.clear()
+            print(logo)
+            deal_2_cards()
+            play_game = True
+                
+        else:
+            play_game = False
+            print("Thanks for playing, good bye!")
+else:
+    play_game = False
+    print("End of game")
+
+
+
+
+
+
+

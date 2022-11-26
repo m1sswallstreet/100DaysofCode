@@ -1,0 +1,85 @@
+#Number Guessing Game Objectives:
+
+# Include an ASCII art logo.
+# Allow the player to submit a guess for a number between 1 and 100.
+# Check user's guess against actual answer. Print "Too high." or "Too low." depending on the user's answer. 
+# If they got the answer correct, show the actual answer to the player.
+# Track the number of turns remaining.
+# If they run out of turns, provide feedback to the player. 
+# Include two different difficulty levels (e.g., 10 guesses in easy mode, only 5 guesses in hard mode).
+import random
+from replit import clear
+from art import logo
+
+correct_answer = 0
+game_level = 'easy'
+lives = 10
+play_game = True
+
+def start_game():
+    global correct_answer
+    print(logo)
+    correct_answer = random.randint(1, 100)
+    print("Welcome to the Number Guessing Game!\nI'm thinking of a number between 1 and 100.\n")
+#    print(f"Hint. The correct answer is {correct_answer}.")
+    return correct_answer
+
+def attempts():
+    global lives
+    lives -= 1
+    #Subtracts a life
+    return lives
+
+def game():
+    global correct_answer
+    global lives
+    playing = True
+
+    while playing:
+        print(f"Lives remaining: {lives}\n")
+        guess = int(input("Make a guess: "))
+        if lives > 1:
+            if guess == correct_answer:
+                playing = False
+                print("Good job! You got it")
+            elif guess > correct_answer:
+                attempts()
+                print("Too high. Guess again.\n")
+            elif guess < correct_answer:
+                attempts()
+                print("Too low. Guess again.\n")
+        elif lives == 1:
+            if guess == correct_answer:
+                playing = False
+                print("You got it just in time!\n")
+            else:
+                playing = False
+                print(f"Sorry! The correct answer was {correct_answer}.")
+                print("You're out of lives!")
+
+    
+
+    
+while play_game:
+    start_game()
+    game_level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+    if game_level.lower() == 'easy':
+        lives = 10
+        game()
+            
+    elif game_level.lower() == 'hard':
+        lives = 5
+        game()
+    else: 
+        print("Please type 'easy' or 'hard'.")
+    
+    play = input("Would you like to play again? Type 'Y' or 'N': ")
+    if play.lower() == 'n':
+        play_game = False
+    else:
+        clear()
+    
+
+
+
+

@@ -1,0 +1,71 @@
+from game_data import data
+from art import logo, vs
+from replit import clear
+import random
+
+#Set playing game to True
+playing_game = True
+
+#Create a score variable and set to 0 to start
+score = 0
+list_size = len(data) - 1
+
+#Start the game with a random choice from the data list calling name, description, and country
+choice_a = random.randint(0, list_size)
+
+
+
+#Start game
+def start_game():
+    print(logo)
+
+def compare(a):
+    celeb = data[a]['name']
+    desc = data[a]['description']
+    nation = data[a]['country']
+    print(f"Compare A: {celeb} a {desc} from {nation}.")
+    return data[a]['follower_count']
+
+#Ask user for guess
+def choose_two(rand_b):  
+    print(f"Against B: {data[rand_b]['name']} a {data[rand_b]['description']} from {data[rand_b]['country']}.")
+    return data[rand_b]['follower_count']
+    
+def compare_two():
+    global score
+    global choice_a
+    global playing_game
+    #compare the user guess to the highest
+    if user_guess == "a" and follower_count1 > follower_count2:
+        score += 1
+        clear()
+        print(logo)
+        print(f"You guessed that {follower_count1} is greater than {follower_count2} the lie detector determined that to be {follower_count1 > follower_count2}.")
+        print(f"You're right! Current score: {score}")
+        #return user guess to use for next comparison
+        return choice_a
+        
+    elif user_guess == "b" and follower_count1 < follower_count2:
+        choice_a = rand_b
+        score += 1
+        clear()
+        print(logo)
+        print(f"You guessed that {follower_count1} is less than {follower_count2} the lie detector determined that to be {follower_count1 < follower_count2}.")
+        print(f"You're right! Current score: {score}")
+        #return user guess to use for next comparison
+        return choice_a
+
+    else:
+        #If user guesses wrong, end the game and show the final score
+        playing_game = False
+        print(f"Sorry, that's wrong. Final score: {score}")
+
+start_game()
+while playing_game:
+    follower_count1 = compare(choice_a)
+    print(vs)
+    #Choose a random option to compare
+    rand_b = random.randint(0, list_size)
+    follower_count2 = choose_two(rand_b)
+    user_guess = (input("Who has more followers? Type 'A' or 'B' ")).lower()
+    choice_a = compare_two()

@@ -1,0 +1,117 @@
+from menu import MENU, resources
+
+#Create variable for customer's choice of drink
+drink_choice = "apple"
+
+#Turn the machine on
+machine_on = True
+
+#Start the machine with supplies
+water = resources["water"]
+milk = resources["milk"]
+coffee = resources["coffee"]
+money = 2.5
+
+def run_report():
+    """When user enters report to the prompt, a report shows the current resource values"""
+    print(f'''
+          Water: {water}ml
+          Milk: {milk}ml
+          Coffee: {coffee}g
+          Money: ${money}
+    ''')
+
+
+def turn_machine_off():
+    global machine_on
+    machine_on = False
+    return machine_on
+
+def pay_drink():
+    global drink_choice
+    global money
+    make_drink = True
+    quarters = float(input("How many quarters? "))
+    dimes = float(input("How many dimes? "))
+    nickels = float(input("How many nickels? "))
+    pennies = float(input("How many pennies? "))
+    cost = MENU[drink_choice]["cost"]
+    payment = quarters * 0.25 + dimes * 0.10 + nickels * 0.05 + pennies * 0.01
+    if payment > cost:
+        change = payment - cost
+        print(f"Here's your change: ${round(change, 2)}!\n")
+        money = money + cost
+        make_drink = True
+        return make_drink
+    else:
+        print("You broke beetch")
+        make_drink = False
+
+#Calculate remaining supplies, return value
+def check_supplies():
+    global water
+    global milk
+    global coffee
+    global drink_choice
+    global money
+    w = MENU[drink_choice]["ingredients"]["water"]
+    m = MENU[drink_choice]["ingredients"]["milk"]
+    c = MENU[drink_choice]["ingredients"]["coffee"]
+    if w <= water:
+        if m <= milk:
+            if c <= coffee:
+                coffee = coffee - c
+                milk = milk - m
+                water = water - w
+                if pay_drink():
+                    print(f"Here's your {drink_choice}. ☕ Enjoy! \n")
+                else:
+                    water += w
+                    coffee += c
+                    milk += m
+                    print("Sorry that's not enough money. Money refunded.\n")
+            else:
+                print("Sorry, there's not enough coffee to make your drink.\n")
+        else:
+            print("Sorry, there's not enough milk to make your drink.\n")
+                    
+    else:
+        print("Sorry, there's not enough water to make your drink.\n")
+
+
+
+
+def choose_drink():
+    drink_choice = input("What would you like? An Espresso, Latte, or Cappuccino? ☕ ")
+    def convert_spelling(choice):
+        """Convert any mispelling into the appropriate drink"""
+        if choice[0].lower() == 'e':
+            drink_choice = "espresso"
+            return drink_choice
+        elif (choice[0]).lower() == 'l':
+            drink_choice = "latte"
+            return drink_choice
+        elif (choice[0]).lower() == 'c':
+            drink_choice = "cappuccino"
+            return drink_choice
+        else:
+            print("Please choose a drink that we serve.")
+
+    if drink_choice == "report":
+        run_report()
+    elif drink_choice == "off":
+        turn_machine_off()
+    else:
+        drink_choice = convert_spelling(drink_choice)
+    
+    return drink_choice
+
+while machine_on:
+    drink_choice = choose_drink()
+    if drink_choice == "off" or drink_choice == "report":
+        turn_machine_off()
+    else:
+        check_supplies()
+    
+
+

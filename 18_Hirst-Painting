@@ -1,0 +1,68 @@
+import random
+import turtle
+from turtle import Turtle, Screen
+
+import colorgram
+
+#
+# # Extract colors from image
+# extract_colors = []
+# colors = colorgram.extract("/Users/latishaclayton/PycharmProjects/hirst_painting/image.jpg", 9)
+#
+# for color in colors:
+#     red = color.rgb.r
+#     green = color.rgb.g
+#     blue = color.rgb.b
+#     new_color = (red, green, blue)
+#     extract_colors.append(new_color)
+#
+# print(extract_colors)
+
+color_list = [(115, 160, 192), (134, 46, 112), (103, 34, 79), (200, 121, 179), (163, 62, 43), (18, 25, 48),
+              (122, 121, 127)]
+
+tim = Turtle()
+turtle.colormode(255)
+tim.speed("fastest")
+
+tim.penup()
+tim.goto(-200, -200)
+tim.pendown()
+
+
+def go_right():
+    global tim
+    for i in range(0, 10):
+        tim.color(random.choice(color_list))
+        tim.dot(20)
+        tim.penup()
+        tim.forward(50)
+    tim.setheading(90)
+    tim.forward(50)
+    tim.setheading(180)
+    tim.forward(50)
+
+
+def go_left():
+    global tim
+    for i in range(0, 10):
+        tim.color(random.choice(color_list))
+        tim.dot(20)
+        tim.penup()
+        tim.forward(50)
+    tim.setheading(90)
+    tim.forward(50)
+    tim.setheading(360)
+    tim.forward(50)
+
+
+tim.hideturtle()
+
+for i in range(0, 5):
+    go_right()
+    go_left()
+
+
+my_screen = Screen()
+print(my_screen.canvheight)
+my_screen.exitonclick()

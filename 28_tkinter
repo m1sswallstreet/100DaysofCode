@@ -1,0 +1,44 @@
+import tkinter as tk
+
+window = tk.Tk()
+window.title("Miles to KM Converter")
+window.minsize(width=300, height=300)
+window.config(padx=10, pady=10)
+
+
+def calculate_km(miles):
+    kilometers = float(miles) * 1.60934
+    return kilometers
+
+
+def button_clicked():
+    kilos = int(calculate_km(answer.get()))
+    km_answer.config(text=kilos)
+    print(kilos)
+
+
+# Entry
+answer = tk.Entry(width=10)
+answer.grid(column=1, row=0)
+
+# Miles Label
+miles_label = tk.Label(text="Miles")
+miles_label.grid(column=2, row=0)
+
+# KM text
+km_text = tk.Label(text="is equal to")
+km_text.grid(column=0, row=1)
+
+# KM answer
+km_answer = tk.Label(text="0")
+km_answer.grid(column=1, row=1)
+
+# KM Label
+km_label = tk.Label(text="KM")
+km_label.grid(column=2, row=1)
+
+# Button
+button = tk.Button(text="Calculate", command=button_clicked)
+button.grid(column=1, row=2)
+
+window.mainloop()
